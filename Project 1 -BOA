@@ -1,44 +1,95 @@
-#Project: Enterprise Data Modernization for Regulatory and Risk Analytics (Bank of America)
+# Project: Enterprise Data Modernization for Regulatory and Risk Analytics (Bank of America)
 
-##Project Overview :
+## Project Overview
+One of the key projects I worked on at Bank of America was an **Enterprise Data Modernization** initiative. The main goal was to migrate critical regulatory and risk analytics data pipelines from legacy on-premise systems into a **cloud-native architecture using AWS and Snowflake**.  
+The project supported multiple business domains such as **credit risk, customer onboarding, and transaction monitoring**, and was part of a broader **digital transformation program** aimed at improving data accessibility, reducing latency, and meeting compliance requirements like **HIPAA and GDPR**.
 
-Sure, one of the key projects I worked on at Bank of America was an Enterprise Data Modernization initiative where our main goal was to move critical regulatory and risk analytics data pipelines from legacy on-premise systems into a cloud-native architecture using AWS and Snowflake. The project supported multiple business domains like credit risk, customer onboarding, and transaction monitoring, and was part of a broader digital transformation program aimed at improving data accessibility, reducing latency, and meeting compliance requirements like HIPAA and GDPR.
+---
 
-##Business Problem 
-Previously, the data pipelines were running on Informatica and Teradata, and they were quite rigid and costly to maintain. Batch jobs ran overnight, often taking 6–8 hours, which delayed data availability for compliance and risk analysis teams. The existing setup also lacked flexibility in scaling up for month-end or regulatory reporting periods. So, our objective was to build a modern, automated, and event-driven data pipeline that could handle near real-time data ingestion, ensure security and auditability, and deliver faster insights to compliance officers and risk analysts.
+## Business Problem
+Previously, the data pipelines were running on **Informatica and Teradata**, and they were rigid and costly to maintain. Batch jobs ran overnight, often taking **6–8 hours**, which delayed data availability for compliance and risk analysis teams.  
+The existing setup also lacked flexibility in scaling up during month-end or regulatory reporting periods.  
 
-## My Role 
-I was responsible for designing and implementing the end-to-end ETL/ELT pipeline using AWS Glue, Snowflake, and AWS Lambda. I also worked closely with the DevOps team to automate the infrastructure using CloudFormation templates and ensured the solution aligned with the bank’s internal security and compliance standards.
+👉 The objective was to build a **modern, automated, event-driven data pipeline** that could:
+- Handle near real-time data ingestion  
+- Ensure data security and auditability  
+- Deliver faster insights to compliance officers and risk analysts  
 
-##Technical Implementation 
-Our data sources included transactional data from Oracle and SQL Server, customer profiles from on-prem systems, and unstructured data like logs and JSON feeds from S3 and Kafka.
-We started by setting up AWS Glue jobs to extract data from S3 and JDBC connectors, apply transformations using PySpark, and then stage the cleansed data into Snowflake’s staging area.
+---
 
-Inside Snowflake, I designed the data model using a multi-layered architecture — staging, curated, and analytics layers. I implemented Clustering Keys and Materialized Views to improve query performance, and tuned our virtual warehouses for balanced compute utilization.
+## My Role
+I was responsible for designing and implementing the **end-to-end ETL/ELT pipeline** using **AWS Glue, Snowflake, and AWS Lambda**.  
+Additionally, I worked closely with the **DevOps team** to automate infrastructure using **AWS CloudFormation templates**, ensuring alignment with the bank’s internal **security and compliance standards**.
 
-For near real-time ingestion, we implemented Snowpipe integrated with AWS Lambda triggers. Whenever a new file landed in S3, Lambda automatically invoked Snowpipe to load data into Snowflake tables. This eliminated manual triggers and reduced latency from hours to minutes.
+---
 
-To ensure governance and security, I configured Role-Based Access Control (RBAC) in Snowflake and used AWS KMS for data encryption. We also used AWS CloudWatch and ELK Stack to monitor job performance, track errors, and visualize operational metrics.
+## Technical Implementation
+**Data Sources:**
+- Transactional data from **Oracle** and **SQL Server**
+- Customer profiles from on-prem systems
+- Unstructured data (logs, JSON feeds) from **S3** and **Kafka**
 
-For job orchestration and dependency handling, we used AWS Step Functions to coordinate multiple Glue jobs and Snowflake SQL scripts. This provided a visual and fault-tolerant workflow that was easy to manage.
+**Data Pipeline Steps:**
+1. Used **AWS Glue jobs** to extract data via S3 and JDBC connectors.  
+2. Applied transformations using **PySpark**.  
+3. Loaded cleansed data into **Snowflake staging area**.  
 
-##Performance Optimization:
-One of the major improvements I worked on was optimizing query performance in Snowflake. By analyzing query profiles, I identified high-cost scans and redesigned a few tables using partition pruning and clustering keys. This reduced our query run time for compliance reports by around 40%.
+Inside Snowflake, I designed a **multi-layered architecture** — *staging, curated, and analytics layers*.  
+- Implemented **Clustering Keys** and **Materialized Views** for query optimization.  
+- Tuned **virtual warehouses** for balanced compute utilization.
 
-I also replaced some heavy Python-based transformations with in-database Snowflake SQL transformations, which helped reduce compute load on Glue and made the pipelines faster and more cost-efficient.
+**Real-Time Ingestion:**
+- Implemented **Snowpipe** integrated with **AWS Lambda** triggers.  
+- Whenever a file landed in S3, Lambda invoked Snowpipe to load data automatically.  
+- Reduced latency from hours to **minutes**.
 
-##Analytics and Reporting Layer:
-For the reporting side, I collaborated with the BI team to build Power BI dashboards that connected directly to Snowflake using parameterized queries. These dashboards were designed for compliance and audit teams to monitor daily transaction volumes, exceptions, and threshold breaches. The key achievement here was enabling real-time visibility into regulatory metrics, which helped the bank’s compliance unit respond to anomalies within minutes instead of hours.
+**Security & Governance:**
+- Configured **Role-Based Access Control (RBAC)** in Snowflake.  
+- Used **AWS KMS** for encryption.  
+- Set up **CloudWatch** and **ELK Stack** for monitoring job performance and operational metrics.  
 
-## Collaboration and Governance:
-Throughout the project, I worked closely with data scientists, governance teams, and AWS architects. I helped curate and publish certified datasets in Snowflake for advanced analytics and model training. We also implemented data lineage and metadata tracking using AWS Glue Data Catalog, which ensured full auditability — a key requirement in the banking domain.
+**Job Orchestration:**
+- Leveraged **AWS Step Functions** to coordinate Glue jobs and Snowflake SQL scripts.  
+- Achieved visual, fault-tolerant, and manageable workflows.
 
-I followed Agile methodology, participating in daily scrums, sprint planning, and reviews, where we continuously optimized the data flow based on feedback from business analysts and compliance users.
+---
 
-## Outcome and Business Impact :
-The new architecture reduced our end-to-end data processing time from about 6 hours to under 45 minutes for daily transaction feeds. The cost of infrastructure went down by approximately 20% after decommissioning legacy ETL servers, and the system became fully serverless and auto-scalable. Most importantly, we achieved real-time compliance monitoring, improved data quality, and simplified data access for regulatory audits and risk modeling.
+## Performance Optimization
+One major improvement was optimizing **Snowflake query performance**.  
+- Analyzed query profiles and redesigned high-cost scans with **partition pruning and clustering keys**.  
+- Reduced compliance report runtime by **~40%**.  
 
+Also replaced heavy Python transformations with **in-database SQL transformations**, reducing Glue compute load and improving cost efficiency.
 
+---
 
-## Key Technologies:
-AWS Glue, Lambda, S3, Step Functions, CloudWatch, CloudFormation, Snowflake, Python (PySpark), SQL, Power BI, ELK Stack, Kafka, Teradata (legacy), Informatica (legacy), RBAC, HIPAA/GDPR Compliance.
+## Analytics and Reporting Layer
+Collaborated with the **BI team** to build **Power BI dashboards** connected directly to Snowflake via parameterized queries.  
+- Dashboards monitored daily transactions, exceptions, and threshold breaches.  
+- Enabled **real-time compliance visibility**, reducing response time from hours to **minutes**.
+
+---
+
+## Collaboration and Governance
+Worked closely with **data scientists, governance teams, and AWS architects**.  
+- Curated and published **certified datasets** in Snowflake for analytics and model training.  
+- Implemented **data lineage and metadata tracking** using **AWS Glue Data Catalog**, ensuring auditability.  
+
+Followed **Agile methodology** — daily scrums, sprint planning, and reviews to continuously optimize workflows based on business feedback.
+
+---
+
+## Outcome and Business Impact
+🚀 **Key Achievements:**
+- Reduced data processing time from **6 hours → under 45 minutes**  
+- Cut infrastructure costs by **~20%** after legacy decommissioning  
+- Achieved **real-time compliance monitoring** and improved **data quality**  
+- Delivered **serverless, auto-scalable, and secure architecture**
+
+---
+
+## Key Technologies
+**AWS Glue**, **Lambda**, **S3**, **Step Functions**, **CloudWatch**, **CloudFormation**,  
+**Snowflake**, **Python (PySpark)**, **SQL**, **Power BI**, **ELK Stack**, **Kafka**,  
+**Teradata (legacy)**, **Informatica (legacy)**, **RBAC**, **HIPAA/GDPR Compliance**.
+
