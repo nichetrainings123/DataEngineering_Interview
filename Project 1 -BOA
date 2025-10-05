@@ -41,3 +41,15 @@ This project really showcased the value of combining AWS serverless services wit
 
 ✅ Key Technologies:
 AWS Glue, Lambda, S3, Step Functions, CloudWatch, CloudFormation, Snowflake, Python (PySpark), SQL, Power BI, ELK Stack, Kafka, Teradata (legacy), Informatica (legacy), RBAC, HIPAA/GDPR Compliance.
+
+##Short Note for above in single paragraph##
+
+Sure. One of the key projects I worked on at Bank of America was part of a Data Modernization initiative where our goal was to migrate legacy Informatica and Teradata ETL workflows into a cloud-native architecture using AWS and Snowflake. The project supported regulatory and risk analytics teams, so performance, data quality, and compliance were all critical.
+
+I was responsible for designing and developing the end-to-end data pipeline using AWS Glue, Lambda, and Snowflake. We ingested data from multiple sources — including Oracle, SQL Server, and S3 — and used Glue jobs with PySpark for cleaning, enrichment, and transformations. The processed data was then loaded into Snowflake’s staging and curated layers, where I optimized performance using Clustering Keys, partitioning, and SQL tuning.
+
+For near real-time data ingestion, I integrated Snowpipe with AWS Lambda so that whenever a new file landed in S3, it automatically triggered data loads into Snowflake. This reduced data latency from hours to minutes. I also implemented RBAC in Snowflake and used AWS KMS encryption to ensure HIPAA and GDPR compliance.
+
+We monitored and orchestrated the entire workflow through AWS Step Functions and CloudWatch, setting up alerts and dashboards for performance and error tracking. On the reporting side, I worked with the BI team to connect Power BI dashboards directly to Snowflake using parameterized queries, giving compliance officers real-time insights into transactions and anomalies.
+
+Overall, the solution reduced processing time from about 6 hours to under 45 minutes, cut infrastructure costs by around 20%, and delivered a fully serverless, auto-scalable, and secure data pipeline. This project really strengthened my experience in combining AWS services and Snowflake to build modern, high-performance data platforms for large financial institutions.
