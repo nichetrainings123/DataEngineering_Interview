@@ -1,0 +1,29 @@
+Project 2: Real-Time Customer Insights and Fraud Detection Platform – Bank of America
+
+Sure. Another major project I worked on at Bank of America was building a Real-Time Customer Insights and Fraud Detection Platform on AWS and Snowflake. The primary goal of this project was to modernize how the bank identifies suspicious transactions and customer activity patterns, so we could enable real-time fraud monitoring and personalized customer analytics across digital channels.
+
+Earlier, the fraud analytics system was batch-based, relying on overnight data loads from multiple legacy systems, which meant delays in detecting fraudulent behavior. Our objective was to move to a streaming, event-driven architecture using AWS native services integrated with Snowflake, providing real-time insights to the risk and analytics teams.
+
+I was responsible for designing and implementing the complete data engineering pipeline, from ingestion and transformation to monitoring and analytics integration.
+
+We started by streaming live customer transaction data and event logs from core banking applications and card systems via Apache Kafka into AWS Kinesis Data Streams. From there, we stored the raw data in Amazon S3, which served as our centralized data lake.
+
+I developed AWS Glue Streaming ETL jobs in PySpark, which consumed data from Kinesis, performed cleansing, enrichment, and transformation, and then wrote structured data into Snowflake staging tables through Snowpipe for near real-time ingestion.
+
+Within Snowflake, I designed a three-layer architecture — staging, curated, and analytics — where the curated layer handled standardized and enriched datasets for consumption by fraud analysts and data scientists. I implemented Clustering Keys, Partitioning, and Materialized Views to optimize the performance of analytical queries that processed millions of daily transactions.
+
+One of my key contributions was implementing dynamic data masking and Role-Based Access Control (RBAC) in Snowflake to protect sensitive Personally Identifiable Information (PII) such as card numbers and customer IDs. This was critical for compliance with PCI DSS, SOX, and internal Bank of America data governance policies.
+
+We also leveraged AWS Lambda functions to trigger event-driven transformations. For example, when a transaction exceeded a predefined threshold, a Lambda function would push an alert to the fraud detection team’s dashboard through an SNS topic.
+
+For orchestration, I configured AWS Step Functions to manage multi-step workflows — from ingestion to enrichment to Snowflake load completion — and used AWS CloudWatch for real-time monitoring, alerting, and performance tuning. We also set up CloudTrail and ELK Stack (Elasticsearch, Logstash, Kibana) for log aggregation, job tracking, and system audits.
+
+Once the data reached Snowflake’s curated layer, I worked with the fraud analytics and data science teams to make these datasets available for predictive modeling and visualization. The curated datasets were exported directly into Amazon SageMaker for fraud model training and evaluation. The model output was then stored back into Snowflake for downstream reporting and business use.
+
+For analytics and reporting, I developed Power BI and Tableau dashboards that connected directly to Snowflake using parameterized queries. These dashboards provided near real-time insights into transaction volumes, geographic distribution, and fraud probability scores. Fraud analysts could see alerts and anomalies within minutes of occurrence, instead of waiting for overnight reports.
+
+One of the biggest technical challenges was managing schema evolution in streaming data — transaction formats often changed as new services were rolled out. To handle this, I used AWS Glue Schema Registry to automatically manage and version schema changes without breaking existing pipelines.
+
+Performance tuning was another critical area. Initially, high-volume ingestion was causing slowdowns, so I optimized Snowpipe’s file load strategy and implemented auto-suspend and auto-resume policies for virtual warehouses. This reduced compute costs while maintaining real-time availability.
+
+The end result was a highly automated, event-driven data platform that could process and make transaction data available within 2–3 minutes of occurrence. This allowed fraud detection teams to react instantly and improved false-positive detection accuracy by around 18%. We also reduced operational costs by about 25% compared to the old on-premise batch system.
